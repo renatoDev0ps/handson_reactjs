@@ -21,10 +21,6 @@ const Genres = () => {
       })
   }
 
-  const updateGenre = id => {
-
-  }
-
   const renderLine = record => {
     return (
       <tr key={record.id}>
@@ -32,7 +28,7 @@ const Genres = () => {
         <td>{record.name}</td>
         <th className=''>
           <button type='button' className='btn btn-danger mr-1' onClick={() => deleteGenre(record.id)}>Delete</button>
-          <button type='button' className='btn btn-warning' onClick={() => updateGenre(record.id)}>Update</button>
+          <Link to={'/genres/' + record.id} className='btn btn-warning'>Update</Link>
         </th>
       </tr>
     )
@@ -52,7 +48,7 @@ const Genres = () => {
   return (
     <div className='container'>
       <h1>Generos</h1>
-      <Link to='/genres/new'>Novo Genero</Link>
+      <Link to='/genres/new' className='btn btn-primary mb-1'>Novo Genero</Link>
       <table className='table table-dark'>
         <thead>
           <tr>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import NewGenres from './NewGenres'
+import UpdateGenres from './UpdateGenres'
 import Genres from './genres'
 import Home from './Home'
 import axios from 'axios'
@@ -22,6 +23,7 @@ function App() {
         <Header />
         <Route path='/' exact component={Home} />
         <Route path='/genres/new' exact component={NewGenres} />
+        <Route path='/genres/:id' exact component={UpdateGenres} />
         <Route path='/genres' exact component={Genres} />
         <pre>{JSON.stringify(data)}</pre>
       </div>
