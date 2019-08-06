@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Genres = () => {
+const Series = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get('/api/genres')
+      .get('/api/series')
       .then(res => {
         setData(res.data.data)
       })
   }, [])
 
-  const deleteGenre = id => {
+  const deleteSeries = id => {
     axios
-      .delete('/api/genres/' + id)
+      .delete('/api/series/' + id)
       .then(res => {
         const filtrado = data.filter(item => item.id !== id)
         setData(filtrado)
@@ -27,8 +27,8 @@ const Genres = () => {
         <th scope='row'>{record.id}</th>
         <td>{record.name}</td>
         <th className=''>
-          <button type='button' className='btn btn-danger mr-1' onClick={() => deleteGenre(record.id)}>Delete</button>
-          <Link to={'/genres/' + record.id} className='btn btn-warning'>Update</Link>
+          <button type='button' className='btn btn-danger mr-1' onClick={() => deleteSeries(record.id)}>Delete</button>
+          <Link to={'/series/' + record.id} className='btn btn-warning'>Update</Link>
         </th>
       </tr>
     )
@@ -37,10 +37,10 @@ const Genres = () => {
   if (data.length === 0) {
     return (
       <div className='container'>
-        <h1>Gêneros</h1>
-        <Link to='/genres/new' className='btn btn-primary mb-1'>Novo Gênero</Link>
+        <h1>Séries</h1>
+        <Link to='/series/new' className='btn btn-primary mb-1'>Nova Séries</Link>
         <div className='alert alert-warning' role='alert'>
-          Você não possui generos criados.
+          Você não possui séries para assistir.
         </div>
       </div>
     )
@@ -48,8 +48,8 @@ const Genres = () => {
 
   return (
     <div className='container'>
-      <h1>Gêneros</h1>
-      <Link to='/genres/new' className='btn btn-primary mb-1'>Novo Gênero</Link>
+      <h1>Séries</h1>
+      <Link to='/series/new' className='btn btn-primary mb-1'>Nova Séries</Link>
       <table className='table table-dark'>
         <thead>
           <tr>
@@ -66,4 +66,4 @@ const Genres = () => {
   )
 }
 
-export default Genres
+export default Series

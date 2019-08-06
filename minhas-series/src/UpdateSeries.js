@@ -2,26 +2,24 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
-const UpdateGenres = ({ match }) => {
+const UpdateSeries = ({ match }) => {
   const [name, setName] = useState('')
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     axios
-      .get('/api/genres/' + match.params.id)
+      .get('/api/series/' + match.params.id)
       .then(res => {
         setName(res.data.name)
       })
   }, [match.params.id])
-
-  console.log(match)
 
   const onChange = evt => {
     setName(evt.target.value)  
   }
   const save = () => {
     axios
-      .put('/api/genres/' + match.params.id, {
+      .put('/api/series/' + match.params.id, {
         name
       })
       .then(res => {
@@ -29,15 +27,15 @@ const UpdateGenres = ({ match }) => {
       })
   }
   if (success) {
-    return <Redirect to='/genres'/>
+    return <Redirect to='/series'/>
   }
   return (
     <div className='container'>
-      <h1>Editar Gênero</h1>
+      <h1>Editar Série</h1>
       <form>
         <div className='form-group'>
           <label htmlFor='nome'>Nome</label>
-          <input type='text' value={name} onChange={onChange} className='form-control' id='nome' aria-describedby='nameHelp' placeholder='Nome do Gênero'/>          
+          <input type='text' value={name} onChange={onChange} className='form-control' id='nome' aria-describedby='nameHelp' placeholder='Nome da Série'/>          
         </div>
         <button type='button' className='btn btn-primary' onClick={save}>Update</button>
       </form>
@@ -45,4 +43,4 @@ const UpdateGenres = ({ match }) => {
   )
 }
 
-export default UpdateGenres
+export default UpdateSeries
